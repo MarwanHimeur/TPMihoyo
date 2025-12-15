@@ -11,10 +11,13 @@
 <header>
     <!-- Menu -->
     <nav>
-        <ul>
+        <div class="nav-brand">
+            <h2>Genshin Collection</h2>
+        </div>
+        <ul class="nav-links">
             <li><a href="index.php">Accueil</a></li>
-            <li><a href="#">Personnages</a></li>
-            <li><a href="#">Armes</a></li>
+            <li><a href="?action=add">Ajouter un personnage</a></li>
+            <li><a href="?action=login">Connexion</a></li>
         </ul>
     </nav>
 </header>
@@ -25,7 +28,7 @@
 </main>
 
 <footer>
-    <p>&copy; 2025 TP Mihoyo - Genshin Impact</p>
+    <p>&copy; 2024 Genshin Impact Collection - Projet R3-01</p>
 </footer>
 </body>
 </html>
