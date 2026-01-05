@@ -43,7 +43,7 @@ abstract class BasePDODAO
      * @param array|null $params Les paramètres de la requête préparée (optionnel)
      * @return PDOStatement|false Le résultat de la requête ou false en cas d'erreur
      */
-    protected function execRequest(string $sql, array $params = null): PDOStatement|false
+    protected function execRequest(string $sql, ?array $params = null): PDOStatement|false
     {
         if ($params == null) {
             // Requête simple sans paramètres

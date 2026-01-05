@@ -12,12 +12,14 @@
     <!-- Menu -->
     <nav>
         <div class="nav-brand">
-            <h2>Genshin Collection</h2>
+            <h2> Genshin Collection</h2>
         </div>
         <ul class="nav-links">
-            <li><a href="index.php">Accueil</a></li>
-            <li><a href="?action=add">Ajouter un personnage</a></li>
-            <li><a href="?action=login">Connexion</a></li>
+            <li><a href="index.php"> Accueil</a></li>
+            <li><a href="index.php?action=add-perso"> Ajouter un personnage</a></li>
+            <li><a href="index.php?action=add-perso-element"> Ajouter un élément</a></li>
+            <li><a href="index.php?action=logs"> Logs</a></li>
+            <li><a href="index.php?action=login"> Connexion</a></li>
         </ul>
     </nav>
 </header>
@@ -28,7 +30,7 @@
 </main>
 
 <footer>
-    <p>&copy; 2024 Genshin Impact Collection - Projet R3-01</p>
+    <p>&copy; 2024 Genshin Impact Collection - Projet R3-01 - TP3</p>
 </footer>
 </body>
 </html>
