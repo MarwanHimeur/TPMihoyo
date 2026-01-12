@@ -5,7 +5,6 @@ $this->layout('template', ['title' => 'Journal des logs']);
 <div class="logs-container">
     <h1> Journal des logs</h1>
 
-    <!-- Sélecteur de mois -->
     <div class="log-selector">
         <label for="log-month">Sélectionner un mois :</label>
         <select id="log-month" onchange="window.location.href='?action=logs&month='+this.value">
@@ -18,7 +17,6 @@ $this->layout('template', ['title' => 'Journal des logs']);
         </select>
     </div>
 
-    <!-- Affichage des logs -->
     <?php if (!empty($logs)): ?>
         <div class="logs-list">
             <?php foreach ($logs as $log): ?>

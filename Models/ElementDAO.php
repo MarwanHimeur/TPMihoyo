@@ -36,7 +36,6 @@ class ElementDAO extends BasePDODAO
             $element->getUrlImg()
         ]);
         
-        // Récupérer l'ID auto-généré
         $element->setId((int)$this->execRequest("SELECT LAST_INSERT_ID() as id")->fetch()['id']);
         
         return $element;

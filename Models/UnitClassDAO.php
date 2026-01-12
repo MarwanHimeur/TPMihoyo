@@ -36,7 +36,6 @@ class UnitClassDAO extends BasePDODAO
             $unitclass->getUrlImg()
         ]);
         
-        // Récupérer l'ID auto-généré
         $unitclass->setId((int)$this->execRequest("SELECT LAST_INSERT_ID() as id")->fetch()['id']);
         
         return $unitclass;

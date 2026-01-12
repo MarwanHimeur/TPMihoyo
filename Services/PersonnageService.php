@@ -31,16 +31,13 @@ class PersonnageService
      */
     public function getAllPersonnages(): array
     {
-        // Récupérer tous les personnages
         $dataPersonnages = $this->personnageDAO->getAll();
         $personnages = [];
 
         foreach ($dataPersonnages as $data) {
-            // Créer le personnage de base
             $personnage = new Personnage();
             $personnage->hydrate($data);
 
-            // Récupérer et attacher l'élément
             if ($data['element']) {
                 $elementData = $this->elementDAO->getByID($data['element']);
                 if ($elementData) {
@@ -49,7 +46,6 @@ class PersonnageService
                 }
             }
 
-            // Récupérer et attacher l'unitclass
             if ($data['unitclass']) {
                 $unitClassData = $this->unitClassDAO->getByID($data['unitclass']);
                 if ($unitClassData) {
@@ -58,7 +54,6 @@ class PersonnageService
                 }
             }
 
-            // Récupérer et attacher l'origin
             if ($data['origin']) {
                 $originData = $this->originDAO->getByID($data['origin']);
                 if ($originData) {
@@ -84,11 +79,9 @@ class PersonnageService
             return null;
         }
 
-        // Créer le personnage de base
         $personnage = new Personnage();
         $personnage->hydrate($data);
 
-        // Récupérer et attacher l'élément
         if ($data['element']) {
             $elementData = $this->elementDAO->getByID($data['element']);
             if ($elementData) {

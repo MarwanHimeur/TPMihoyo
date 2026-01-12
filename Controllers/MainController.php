@@ -34,10 +34,8 @@ class MainController
      */
     public function index(?string $message = null): void
     {
-        // Récupération de tous les personnages
         $listPersonnage = $this->personnageService->getAllPersonnages();
 
-        // render() génère le HTML de la vue avec les données
         echo $this->templates->render('home', [
             'gameName' => 'Genshin Impact',
             'listPersonnage' => $listPersonnage,

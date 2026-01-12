@@ -36,7 +36,6 @@ class OriginDAO extends BasePDODAO
             $origin->getUrlImg()
         ]);
         
-        // Récupérer l'ID auto-généré
         $origin->setId((int)$this->execRequest("SELECT LAST_INSERT_ID() as id")->fetch()['id']);
         
         return $origin;
