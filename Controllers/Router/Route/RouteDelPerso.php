@@ -27,12 +27,17 @@ class RouteDelPerso extends Route
      */
     public function get(array $params = []): void
     {
-        // Récupérer l'ID du personnage
-        $id = $this->getParam($params, 'id', false);
-        
-        // Pour le moment, juste rediriger vers l'index avec un message
-        // La vraie suppression sera implémentée dans le prochain TP
-        $this->controller->deletePerso($id);
+        try {
+            // Récupérer l'ID du personnage
+            $id = $this->getParam($params, 'id', false);
+            
+            // Supprimer le personnage
+            $this->controller->deletePersoAndIndex($id);
+            
+        } catch (Exception $e) {
+            // En cas d'erreur (ID manquant), appeler sans paramètre
+            $this->controller->deletePersoAndIndex();
+        }
     }
 
     /**

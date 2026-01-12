@@ -36,7 +36,20 @@ class RouteAddPerso extends Route
      */
     public function post(array $params = []): void
     {
-        // Pour le moment, vide - sera implémenté dans le prochain TP
-        $this->get($params);
+       try {
+            $data = [
+                'name' => $this->getParam($params, 'name', false),
+                'element' => intval($this->getParam($params, 'element', false)),
+                'unitclass' => intval($this->getParam($params, 'unitclass', false)),
+                'origin' => $this->getParam($params, 'origin', true) ? intval($this->getParam($params, 'origin')) : null,
+                'rarity' => (int)$this->getParam($params, 'rarity', false),
+                'urlImg' => $this->getParam($params, 'urlImg', false)
+            ];
+
+            $this->controller->addPerso($data);
+
+        } catch (Exception $e) {
+            $this->controller->displayAddPerso($e->getMessage());
+        }
     }
 }

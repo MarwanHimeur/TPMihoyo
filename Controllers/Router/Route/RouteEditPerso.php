@@ -27,11 +27,12 @@ class RouteEditPerso extends Route
      */
     public function get(array $params = []): void
     {
-        // Récupérer l'ID du personnage
-        $id = $this->getParam($params, 'id', false);
-        
-        // Rediriger vers le formulaire d'ajout avec l'ID (pour pré-remplir)
-        $this->controller->displayAddPerso($id);
+        try {
+            $id = $this->getParam($params, 'id', false);
+            $this->controller->displayEditPerso($id);
+        } catch (Exception $e) {
+            $this->controller->displayAddPerso("ID non trouvé");
+        }
     }
 
     /**
@@ -40,7 +41,25 @@ class RouteEditPerso extends Route
      */
     public function post(array $params = []): void
     {
-        // Pour le moment, vide - sera implémenté dans le prochain TP
-        $this->get($params);
+        try {
+            $data = [
+                'id' => $this->getParam($params, 'id', false),
+                'name' => $this->getParam($params, 'name', false),
+                'element' => intval($this->getParam($params, 'element', false)),
+                'unitclass' => intval($this->getParam($params, 'unitclass', false)),
+                'origin' => $this->getParam($params, 'origin', true) ? intval($this->getParam($params, 'origin')) : null,
+                'rarity' => (int)$this->getParam($params, 'rarity', false),
+                'urlImg' => $this->getParam($params, 'urlImg', false)
+            ];
+
+            $this->controller->editPersoAndIndex($data);
+
+        } catch (Exception $e) {
+            if (isset($params['id'])) {
+                $this->controller->displayEditPerso($params['id'], $e->getMessage());
+            } else {
+                $this->controller->displayAddPerso($e->getMessage());
+            }
+        }
     }
 }

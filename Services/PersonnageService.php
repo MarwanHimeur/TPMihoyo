@@ -4,28 +4,69 @@ namespace Services;
 
 use Models\Personnage;
 use Models\PersonnageDAO;
+use Models\Element;
+use Models\ElementDAO;
+use Models\Origin;
+use Models\OriginDAO;
+use Models\UnitClass;
+use Models\UnitClassDAO;
 
 class PersonnageService
 {
     private PersonnageDAO $personnageDAO;
+    private ElementDAO $elementDAO;
+    private OriginDAO $originDAO;
+    private UnitClassDAO $unitClassDAO;
 
     public function __construct()
     {
         $this->personnageDAO = new PersonnageDAO();
+        $this->elementDAO = new ElementDAO();
+        $this->originDAO = new OriginDAO();
+        $this->unitClassDAO = new UnitClassDAO();
     }
 
     /**
-     * Récupère tous les personnages sous forme d'objets Personnage
-     * @return array Tableau d'objets Personnage
+     * Récupère tous les personnages avec leurs attributs complets
      */
     public function getAllPersonnages(): array
     {
-        $data = $this->personnageDAO->getAll();
+        // Récupérer tous les personnages
+        $dataPersonnages = $this->personnageDAO->getAll();
         $personnages = [];
 
-        foreach ($data as $row) {
+        foreach ($dataPersonnages as $data) {
+            // Créer le personnage de base
             $personnage = new Personnage();
-            $personnage->hydrate($row);
+            $personnage->hydrate($data);
+
+            // Récupérer et attacher l'élément
+            if ($data['element']) {
+                $elementData = $this->elementDAO->getByID($data['element']);
+                if ($elementData) {
+                    $element = new Element($elementData);
+                    $personnage->setElement($element);
+                }
+            }
+
+            // Récupérer et attacher l'unitclass
+            if ($data['unitclass']) {
+                $unitClassData = $this->unitClassDAO->getByID($data['unitclass']);
+                if ($unitClassData) {
+                    $unitClass = new UnitClass($unitClassData);
+                    $personnage->setUnitclass($unitClass);
+                }
+            }
+
+            // Récupérer et attacher l'origin
+            if ($data['origin']) {
+                $originData = $this->originDAO->getByID($data['origin']);
+                if ($originData) {
+                    $origin = new Origin($originData);
+                    $personnage->setOrigin($origin);
+                }
+            }
+
             $personnages[] = $personnage;
         }
 
@@ -33,9 +74,7 @@ class PersonnageService
     }
 
     /**
-     * Récupère un personnage par son ID sous forme d'objet Personnage
-     * @param string $id L'ID du personnage
-     * @return Personnage|null L'objet Personnage ou null si non trouvé
+     * Récupère un personnage par son ID avec ses attributs complets
      */
     public function getPersonnageById(string $id): ?Personnage
     {
@@ -45,8 +84,36 @@ class PersonnageService
             return null;
         }
 
+        // Créer le personnage de base
         $personnage = new Personnage();
         $personnage->hydrate($data);
+
+        // Récupérer et attacher l'élément
+        if ($data['element']) {
+            $elementData = $this->elementDAO->getByID($data['element']);
+            if ($elementData) {
+                $element = new Element($elementData);
+                $personnage->setElement($element);
+            }
+        }
+
+        // Récupérer et attacher l'unitclass
+        if ($data['unitclass']) {
+            $unitClassData = $this->unitClassDAO->getByID($data['unitclass']);
+            if ($unitClassData) {
+                $unitClass = new UnitClass($unitClassData);
+                $personnage->setUnitclass($unitClass);
+            }
+        }
+
+        // Récupérer et attacher l'origin
+        if ($data['origin']) {
+            $originData = $this->originDAO->getByID($data['origin']);
+            if ($originData) {
+                $origin = new Origin($originData);
+                $personnage->setOrigin($origin);
+            }
+        }
 
         return $personnage;
     }

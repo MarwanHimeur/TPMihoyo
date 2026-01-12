@@ -32,27 +32,27 @@ $this->layout('template', ['title' => 'TP Mihoyo - Collection']);
                         <div class="personnage-details">
                             <div class="detail-item">
                                 <span class="label">Élément:</span>
-                                <span class="value element-<?= strtolower($personnage->getElement()) ?>">
-                                    <?= $this->e($personnage->getElement()) ?>
+                                <span class="value element-<?= strtolower($personnage->getElement()?->getName() ?? '') ?>">
+                                    <?= $this->e($personnage->getElement()?->getName() ?? 'N/A') ?>
                                 </span>
                             </div>
                             
                             <div class="detail-item">
                                 <span class="label">Arme:</span>
-                                <span class="value"><?= $this->e($personnage->getUnitclass()) ?></span>
+                                <span class="value"><?= $this->e($personnage->getUnitclass()?->getName() ?? 'N/A') ?></span>
                             </div>
                             
                             <?php if ($personnage->getOrigin()): ?>
                                 <div class="detail-item">
                                     <span class="label">Région:</span>
-                                    <span class="value"><?= $this->e($personnage->getOrigin()) ?></span>
+                                    <span class="value"><?= $this->e($personnage->getOrigin()->getName()) ?></span>
                                 </div>
                             <?php endif; ?>
                         </div>
                         
                         <div class="personnage-actions">
                             <a href="index.php?action=edit-perso&id=<?= $personnage->getId() ?>" class="btn btn-edit">
-                                Modifier
+                                 Modifier
                             </a>
                             <a href="index.php?action=del-perso&id=<?= $personnage->getId() ?>" 
                                class="btn btn-delete"

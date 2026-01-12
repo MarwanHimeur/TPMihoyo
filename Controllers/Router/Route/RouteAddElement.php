@@ -36,7 +36,15 @@ class RouteAddElement extends Route
      */
     public function post(array $params = []): void
     {
-        // Pour le moment, vide - sera implémenté plus tard
-        $this->get($params);
+        try {
+            $type = $this->getParam($params, 'type', false);
+            $name = $this->getParam($params, 'name', false);
+            $urlImg = $this->getParam($params, 'urlImg', false);
+
+            $this->controller->addAttribute($type, $name, $urlImg);
+
+        } catch (Exception $e) {
+            $this->controller->displayAddElement($e->getMessage());
+        }
     }
 }

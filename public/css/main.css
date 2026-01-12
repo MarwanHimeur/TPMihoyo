@@ -257,3 +257,58 @@ footer {
     padding: 2rem;
     color: white;
 }
+
+.logs-container {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.logs-container h1 {
+    color: #333;
+    text-shadow: none;
+    margin-bottom: 2rem;
+}
+
+.log-selector {
+    margin-bottom: 2rem;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 5px;
+}
+
+.log-selector label {
+    font-weight: bold;
+    margin-right: 1rem;
+}
+
+.log-selector select {
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    min-width: 200px;
+}
+
+.logs-list {
+    background: #f8f9fa;
+    padding: 1rem;
+    border-radius: 5px;
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+.log-entry {
+    padding: 0.8rem;
+    margin-bottom: 0.5rem;
+    background: white;
+    border-left: 4px solid #667eea;
+    border-radius: 4px;
+    font-family: monospace;
+    font-size: 0.9rem;
+}
+
+.log-entry:hover {
+    background: #f0f0f0;
+}

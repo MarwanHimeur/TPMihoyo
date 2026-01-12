@@ -6,29 +6,23 @@ class Personnage
 {
     private ?string $id;
     private string $name;
-    private string $element;
-    private string $unitclass;
+    private ?Element $element;
+    private ?UnitClass $unitclass;
     private int $rarity;
-    private ?string $origin;
+    private ?Origin $origin;
     private string $urlImg;
 
-    /**
-     * Constructeur du personnage
-     */
     public function __construct()
     {
         $this->id = null;
+        $this->element = null;
+        $this->unitclass = null;
         $this->origin = null;
     }
 
-    /**
-     * Hydrate l'objet Personnage à partir d'un tableau associatif
-     * @param array $data Tableau associatif contenant les données
-     */
     public function hydrate(array $data): void
     {
         foreach ($data as $key => $value) {
-            // Convertir snake_case en camelCase pour les setters
             $method = 'set' . str_replace('_', '', ucwords($key, '_'));
             
             if (method_exists($this, $method)) {
@@ -37,8 +31,7 @@ class Personnage
         }
     }
 
-    // ==================== GETTERS ====================
-
+    // Getters
     public function getId(): ?string
     {
         return $this->id;
@@ -49,12 +42,12 @@ class Personnage
         return $this->name;
     }
 
-    public function getElement(): string
+    public function getElement(): ?Element
     {
         return $this->element;
     }
 
-    public function getUnitclass(): string
+    public function getUnitclass(): ?UnitClass
     {
         return $this->unitclass;
     }
@@ -64,7 +57,7 @@ class Personnage
         return $this->rarity;
     }
 
-    public function getOrigin(): ?string
+    public function getOrigin(): ?Origin
     {
         return $this->origin;
     }
@@ -74,8 +67,7 @@ class Personnage
         return $this->urlImg;
     }
 
-    // ==================== SETTERS ====================
-
+    // Setters
     public function setId(?string $id): void
     {
         $this->id = $id;
@@ -86,14 +78,22 @@ class Personnage
         $this->name = $name;
     }
 
-    public function setElement(string $element): void
+    public function setElement($element): void
     {
-        $this->element = $element;
+        if ($element instanceof Element) {
+            $this->element = $element;
+        } elseif (is_int($element)) {
+            $this->element = new Element(['id' => $element]);
+        }
     }
 
-    public function setUnitclass(string $unitclass): void
+    public function setUnitclass($unitclass): void
     {
-        $this->unitclass = $unitclass;
+        if ($unitclass instanceof UnitClass) {
+            $this->unitclass = $unitclass;
+        } elseif (is_int($unitclass)) {
+            $this->unitclass = new UnitClass(['id' => $unitclass]);
+        }
     }
 
     public function setRarity(int $rarity): void
@@ -101,9 +101,15 @@ class Personnage
         $this->rarity = $rarity;
     }
 
-    public function setOrigin(?string $origin): void
+    public function setOrigin($origin): void
     {
-        $this->origin = $origin;
+        if ($origin instanceof Origin) {
+            $this->origin = $origin;
+        } elseif (is_int($origin)) {
+            $this->origin = new Origin(['id' => $origin]);
+        } elseif ($origin === null || $origin === '') {
+            $this->origin = null;
+        }
     }
 
     public function setUrlImg(string $urlImg): void

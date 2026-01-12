@@ -9,7 +9,6 @@
 
 <body>
 <header>
-    <!-- Menu -->
     <nav>
         <div class="nav-brand">
             <h2> Genshin Collection</h2>
@@ -24,13 +23,12 @@
     </nav>
 </header>
 
-<!-- #contenu -->
 <main id="contenu">
     <?= $this->section('content') ?>
 </main>
 
 <footer>
-    <p>&copy; 2024 Genshin Impact Collection - Projet R3-01 - TP3</p>
+    <p>&copy; 2026 Genshin Impact Collection - Projet R3-01</p>
 </footer>
 </body>
 </html>
